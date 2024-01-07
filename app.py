@@ -6,6 +6,10 @@ app = Flask(__name__)
 def std_path():
     return send_from_directory('frontend/dist/', 'index.html')
 
+
+
+
+
 @app.route("/<path:path>")
 def serve_static(path):
     return send_from_directory('frontend/dist/', path)
