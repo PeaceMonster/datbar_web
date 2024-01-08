@@ -1,29 +1,45 @@
 <script lang='ts'>
+    import { SvelteComponent, onMount } from "svelte";
+    import type { Page } from "./lib/types";
     import Forside from "./forside/Forside.svelte";
     import Barplan from "./barplan/Barplan.svelte";
 
-    let pages: any = [
-        [Forside, "Forside"], 
-        [Barplan, "Barplan"],
+    let pages: Page[] = [
+        {
+            component : Forside,
+            name : "Forside",
+            route : "/"
+        }, 
+        {
+            component : Barplan,
+            name : "Barplan",
+            route : "/barplan"
+        },
     ];
+    
     let selected : number = 0;
+
+    onMount(() => {
+        let url = window.location.pathname;
+        selected = pages.findIndex((page) => page.route == url);
+    });
 </script>
 
 <main>
     <div class="header">
         <h1>
-            <img src="logo.png" alt="" >
+            <img src="assets/logo.png" alt="" >
             Fredagscaféen
         </h1>
         <div class="navbar">
             {#each pages as page, i (i)}
-                <a href="/" on:click|preventDefault={() => selected = i}>{page[1]}</a>
+                <a href={page.route}>{page.name}</a>
             {/each}
-            
+            <a href="/admin">Admin</a>
         </div>
     </div>
 
-    <svelte:component this={pages[selected][0]}></svelte:component>
+    <svelte:component this={pages[selected].component}></svelte:component>
 
     <footer>
         <hr>

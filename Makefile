@@ -1,4 +1,4 @@
-default: build
+default: build server
 
 build:
 	cd frontend; npm run build
