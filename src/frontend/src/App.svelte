@@ -3,6 +3,7 @@
     import type { Page } from "./lib/types";
     import Forside from "./forside/Forside.svelte";
     import Barplan from "./barplan/Barplan.svelte";
+    import Bartenders from "./bartenders/Bartenders.svelte";
 
     let pages: Page[] = [
         {
@@ -15,6 +16,11 @@
             name : "Barplan",
             route : "/barplan"
         },
+        {
+            component: Bartenders,
+            name : "Bartenders",
+            route : "/bartenders"
+        }
     ];
     
     let selected : number = 0;
