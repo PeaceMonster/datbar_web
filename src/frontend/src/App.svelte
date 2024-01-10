@@ -4,22 +4,30 @@
     import Forside from "./forside/Forside.svelte";
     import Barplan from "./barplan/Barplan.svelte";
     import Bartenders from "./bartenders/Bartenders.svelte";
+    import Navbar from "./lib/Navbar.svelte";
+
 
     let pages: Page[] = [
         {
             component : Forside,
             name : "Forside",
-            route : "/"
+            route : "/",
+            menu: false,
+            subitems: null,
         }, 
         {
             component : Barplan,
             name : "Barplan",
-            route : "/barplan"
+            route : "/barplan",
+            menu: false,
+            subitems: null,
         },
         {
             component: Bartenders,
             name : "Bartenders",
-            route : "/bartenders"
+            route : "/bartenders",
+            menu: false,
+            subitems: null,
         }
     ];
     
@@ -37,12 +45,7 @@
             <img src="assets/logo.png" alt="" >
             Fredagscaféen
         </h1>
-        <div class="navbar">
-            {#each pages as page, i (i)}
-                <a href={page.route}>{page.name}</a>
-            {/each}
-            <a href="/admin">Admin</a>
-        </div>
+        <Navbar pages={pages} />
     </div>
 
     <svelte:component this={pages[selected].component}></svelte:component>
@@ -65,19 +68,8 @@
         display: inline-block;
     }
 
-    .navbar {
-        display: flex;
-        width: 100%;
-        margin-top: 10px;
-    }
 
-    .header a {
-        text-decoration: none;
-        font-size: larger;
-        display: inline-block;
-        padding: 10px 20px;
-        margin-bottom: 20px;
-    }
+
 
     img {
         height: 50px;

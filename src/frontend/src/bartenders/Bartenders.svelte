@@ -17,15 +17,32 @@
     
     <ul class="list-group nuværende">
         <li class="list-group-item list-group-item-success">
-            Nuværende Bartendere
+            <strong>Nuværende Bartendere ({active.length})</strong>
         </li>
-
+        {#each active as bar}
+            <li class="list-group-item">
+                {bar.name} (
+                    <code>
+                        {bar.username}
+                    </code>
+                )
+            </li>
+        {/each}
     </ul>
     
     <ul class="list-group tidligere">
         <li class="list-group-item list-group-item-warning">
-            Tidligere Bartendere
+            <strong>Tidligere Bartendere ({inactive.length})</strong>
         </li>
+        {#each inactive as bar}
+            <li class="list-group-item">
+                {bar.name} (
+                    <code>
+                        {bar.username}
+                    </code>
+                )
+            </li>
+        {/each}
     </ul>
     
 </div>
