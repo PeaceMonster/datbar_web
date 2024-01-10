@@ -1,3 +1,10 @@
+use actix_web::{HttpServer, App};
+
+
+
 fn main() {
-    println!("Hello, world!");
+    HttpServer::new(|| {
+        App::new()
+        
+    })
 }
