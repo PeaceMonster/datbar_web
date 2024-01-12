@@ -1,13 +1,13 @@
 <script lang='ts'>
+    import NavbarElement from "./NavbarElement.svelte";
     import type { Page } from "./types";
     export let pages : Page[] = [];
 </script>
 
 <div class="navbar">
     {#each pages as page, i (i)}
-        <a href={page.route}>{page.name}</a>
+        <NavbarElement page={page}/>
     {/each}
-    <a href="/admin">Admin</a>
 </div>
 
 
@@ -16,13 +16,8 @@
         display: flex;
         width: 100%;
         margin-top: 10px;
-    }
-
-    a {
-        text-decoration: none;
-        font-size: larger;
-        display: inline-block;
-        padding: 10px 20px;
         margin-bottom: 20px;
     }
+
+
 </style>
