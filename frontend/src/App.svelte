@@ -1,12 +1,11 @@
 <script lang='ts'>
-    import { SvelteComponent, onMount } from "svelte";
+    import { onMount } from "svelte";
     import type { Page } from "./lib/types";
     import Forside from "./forside/Forside.svelte";
     import Barplan from "./barplan/Barplan.svelte";
     import Bartenders from "./bartenders/Bartenders.svelte";
     import Navbar from "./lib/Navbar.svelte";
     import P404 from "./lib/P404.svelte";
-    import Test from "./testpage/Test.svelte";
 
 
     let pages: Page[] = [
@@ -24,42 +23,35 @@
         },
         {
             component: Bartenders,
-            name : "Bartenders",
+            name : "Bartendere",
             route : "/bartenders",
             subitems: [],
         },
         {
-            component : P404,
-            name : "Admin",
-            route : "/admin",
-            subitems : []
+            component: P404,
+            name : "Udlejning",
+            route : "/udlejning",
+            subitems : [
+                {
+                    name : "Test",
+                    route : "/test",
+                    component : P404
+                }
+            ]
         },
         {
-            name: "Test",
-            route: "/test",
-            component: P404,
-            subitems : [{
-                    name: "Test",
-                    route: "/test",
-                    component: Barplan,
-                },
-                {
-                    name: "Dette er en meget lang Test",
-                    route: "/test2",
-                    component: Bartenders,
-                },
-                {
-                    name: "Test",
-                    route: "/test3",
-                    component: Barplan,
-                },
-            ]
-        }
+            component : P404,
+            name : "Admin",
+            route : "/admin/",
+            subitems : []
+        },
     ];
     
     let selected : ConstructorOfATypedSvelteComponent;
-
+    let logo : string;
     onMount(() => {
+        logo = window.location.origin + "/assets/logo.png";
+        
         let url = window.location.pathname.split("/");
         let current_page = pages.find((page) => 
             page.route.split("/")[1] == url[1]
@@ -91,7 +83,7 @@
 <main>
     <div class="header">
         <h1>
-            <img src="/assets/logo.png" alt="" >
+            <img src={logo} alt="" >
             Fredagscaféen
         </h1>
         <Navbar pages={pages}/>

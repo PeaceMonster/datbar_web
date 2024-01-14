@@ -20,11 +20,16 @@
     }
     
 </script>
-<div>
+<div class="wrapper">
     {#if page.subitems.length == 0 }
         <a href={page.route}>{page.name}</a>
     {:else}
-        <a href={page.route} on:click|preventDefault={toggle_dropdown} class:dropmenu={drop}>{page.name}</a>
+        <a href={page.route} on:click|preventDefault={toggle_dropdown} class:dropmenu={drop}>
+            {page.name}
+            <span class="caret"></span>
+        </a>
+
+        
         <div id="drop" hidden={!drop} class:drop>
             {#each page.subitems as sub}
                 <a href={page.route + sub.route} class="subitem">{sub.name}</a>
@@ -55,6 +60,7 @@
         padding: 0 10px;
         font-size: medium;
     }
+
 
     .drop {
         position: absolute;

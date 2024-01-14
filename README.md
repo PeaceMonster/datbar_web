@@ -3,21 +3,17 @@
 ## Setup
 
 ### Backend
-Opret et venv til python 
+
+Sørg for at du har den nyeste version af cargo.
+
+Installer dependencies med
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Installerer derefter requirements
-
-```
-pip install -r requirements.txt
+cargo install
 ```
 
 ### Frontend
-Cd ind i frontend og installer packages:
+Cd ind i src/frontend og installer packages:
 
 ```
 npm install

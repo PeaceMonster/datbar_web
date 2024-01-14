@@ -4,7 +4,7 @@ build:
 	cd frontend; npm run build
 
 dev: 
-	cd src/frontend; npm run dev
+	cd frontend; npm run dev
 
 server:
-	flask --app app.py run
+	cargo run
