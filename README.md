@@ -33,7 +33,7 @@ cd frontend && npm run build
 ### Køre backend
 
 ```
-flask --app app.py run
+cargo run
 ```
 
 ### Køre frontend i dev mode (Hot reload)

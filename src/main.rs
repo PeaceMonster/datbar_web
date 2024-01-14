@@ -27,7 +27,6 @@ async fn main() -> std::io::Result<()> {
 
 #[get("/{page:.*}")]
 async fn frontpage() -> Result<NamedFile, Error> {
-    debug!("Getting Frontpage");
     Ok(NamedFile::open("frontend/dist/index.html")?)
 }
 

@@ -5,6 +5,7 @@
     import Barplan from "./barplan/Barplan.svelte";
     import Bartenders from "./bartenders/Bartenders.svelte";
     import Navbar from "./lib/Navbar.svelte";
+    import Anlaeg from "./udlejning/Anlaeg.svelte";
     import P404 from "./lib/P404.svelte";
 
 
@@ -33,9 +34,9 @@
             route : "/udlejning",
             subitems : [
                 {
-                    name : "Test",
-                    route : "/test",
-                    component : P404
+                    name : "Udlejning af fadølsanlæg",
+                    route : "/anlaeg",
+                    component : Anlaeg
                 }
             ]
         },
