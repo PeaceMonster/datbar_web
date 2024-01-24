@@ -5,8 +5,13 @@
     import Barplan from "./barplan/Barplan.svelte";
     import Bartenders from "./bartenders/Bartenders.svelte";
     import Navbar from "./lib/Navbar.svelte";
+
+    // Udlejning Subpages
     import Anlaeg from "./udlejning/Anlaeg.svelte";
+
+    import Guides from "./guides/Guides.svelte";
     import P404 from "./lib/P404.svelte";
+    import Events from "./events/Events.svelte";
 
 
     let pages: Page[] = [
@@ -39,6 +44,18 @@
                     component : Anlaeg
                 }
             ]
+        },
+        {
+            component: Guides,
+            name: "Guides",
+            route: "/guides",
+            subitems: [],
+        },
+        {
+            component: Events,
+            name: "Events",
+            route: "/events",
+            subitems: [],
         },
         {
             component : P404,

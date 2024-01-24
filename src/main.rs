@@ -2,7 +2,7 @@ use actix_files::{self, NamedFile};
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder, Error};
 use log::debug;
 
-
+mod api;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -16,7 +16,7 @@ async fn main() -> std::io::Result<()> {
                 "/assets",
                 "frontend/dist/assets",
             ))
-            .service(web::scope("/api").service(hello))
+            .service(api::register(web::scope("/api")))
             .service(admin_page)
             .service(frontpage)
     })
@@ -35,8 +35,4 @@ async fn admin_page() -> Result<NamedFile, Error> {
     Ok(NamedFile::open("frontend/dist/admin.html")?)
 }
 
-#[get("/hello")]
-async fn hello() -> impl Responder {
-    debug!("Access to api");
-    HttpResponse::Ok().body("Hello World")
-}
+
