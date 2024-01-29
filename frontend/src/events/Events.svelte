@@ -2,8 +2,6 @@
     
     import EventComponent from "./EventComponent.svelte";
 
-    
-
 
     let events = [];
 

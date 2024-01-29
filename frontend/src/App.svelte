@@ -12,6 +12,8 @@
     import Guides from "./guides/Guides.svelte";
     import P404 from "./lib/P404.svelte";
     import Events from "./events/Events.svelte";
+    import About from "./about/About.svelte";
+    import Bestyrelse from "./bestyrelse/Bestyrelse.svelte";
 
 
     let pages: Page[] = [
@@ -50,11 +52,23 @@
             name: "Guides",
             route: "/guides",
             subitems: [],
+        }, 
+        {
+            component: Bestyrelse,
+            name: "Bestyrelsen",
+            route: "/best",
+            subitems : [],
         },
         {
             component: Events,
             name: "Events",
             route: "/events",
+            subitems: [],
+        },
+        {
+            component: About,
+            name: "Om baren",
+            route: "/about",
             subitems: [],
         },
         {
@@ -107,7 +121,9 @@
         <Navbar pages={pages}/>
     </div>
 
-    <svelte:component this={selected}></svelte:component>
+    <div class="container wrapper">
+        <svelte:component this={selected}></svelte:component>
+    </div>
     
     <footer>
         <hr>
@@ -126,9 +142,6 @@
         font-family: serif;
         display: inline-block;
     }
-
-
-
 
     img {
         height: 50px;
