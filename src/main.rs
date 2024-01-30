@@ -1,22 +1,24 @@
 use actix_files::{self, NamedFile};
-use actix_web::{get, web, App, HttpResponse, HttpServer, Responder, Error};
+use actix_web::{get, web, App, Error, HttpServer};
 use log::debug;
 
+use database::db_mysql::DBClient;
+
 mod api;
+mod database;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-
     env_logger::init();
 
+    let db_client = DBClient::new().await.unwrap();
+    
+
     debug!("Starting Server");
-    HttpServer::new(|| {
+    HttpServer::new(move || {
         App::new()
-            .service(actix_files::Files::new(
-                "/assets",
-                "frontend/dist/assets",
-            ))
-            .service(api::register(web::scope("/api")))
+            .service(actix_files::Files::new("/assets", "frontend/dist/assets"))
+            .service(api::register(web::Data::new(db_client.clone()) ,web::scope("/api")))
             .service(admin_page)
             .service(frontpage)
     })
@@ -34,5 +36,3 @@ async fn frontpage() -> Result<NamedFile, Error> {
 async fn admin_page() -> Result<NamedFile, Error> {
     Ok(NamedFile::open("frontend/dist/admin.html")?)
 }
-
-

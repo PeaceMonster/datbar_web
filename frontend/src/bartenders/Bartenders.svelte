@@ -1,12 +1,14 @@
 <script lang="ts">
-
-    type Bartender = {
-        name: string,
-        username: string
-    }
+    import type { Bartender } from "./script";
+    import { get_bartenders } from "./script";
 
     let active : Bartender[] = [];
     let inactive : Bartender[] = [];
+
+    get_bartenders().then((result) => {
+        active = result[0];
+        inactive = result[1];
+    })
 
 </script>
 
