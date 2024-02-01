@@ -1,4 +1,4 @@
-use chrono::{DateTime, FixedOffset};
+use chrono::NaiveDate;
 
 use serde::Serialize;
 
@@ -9,8 +9,14 @@ pub struct Bartender {
     pub active: bool,
 }
 
-pub trait DBSocket {
-    fn get_barplan(&self, date: DateTime<FixedOffset>);
+pub struct Barplan {
+    pub date: NaiveDate,
+    pub responisble: Bartender,
+    pub bartenders: Vec<Bartender>,
+}
 
-    fn get_bartenders(&self) -> Result<Vec<Bartender>, anyhow::Error>;
+pub trait DBSocket {
+    fn get_barplan(&self, date: NaiveDate) -> anyhow::Result<Barplan>;
+
+    fn get_bartenders(&self) -> anyhow::Result<Vec<Bartender>>;
 }

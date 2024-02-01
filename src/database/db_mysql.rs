@@ -1,6 +1,7 @@
+use chrono::NaiveDate;
 use mysql::{prelude::Queryable, Pool};
 
-use super::db_socket::{Bartender, DBSocket};
+use super::db_socket::{Barplan, Bartender, DBSocket};
 
 #[derive(Clone)]
 pub struct DBClient {
@@ -8,7 +9,7 @@ pub struct DBClient {
 }
 
 impl DBSocket for DBClient {
-    fn get_barplan(&self, date: chrono::prelude::DateTime<chrono::prelude::FixedOffset>) {
+    fn get_barplan(&self, date: NaiveDate) -> anyhow::Result<Barplan> {
         todo!()
     }
 
