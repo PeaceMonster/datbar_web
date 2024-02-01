@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Bartender } from "./script";
+    import type { Bartender } from "../lib/types";
     import { get_bartenders } from "./script";
 
     let active : Bartender[] = [];

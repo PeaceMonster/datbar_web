@@ -13,6 +13,7 @@ chrono = { version = "0.4.33", features = ["serde"] }
 env_logger = "0.10.1"
 log = "0.4.20"
 mysql = "24.0.0"
+mysql_common = { version = "0.32.0", features = ["chrono"] }
 serde = { version = "1.0.196", features = ["derive"] }
 tokio = { version = "1.35.1", features = ["rt-multi-thread"] }
 

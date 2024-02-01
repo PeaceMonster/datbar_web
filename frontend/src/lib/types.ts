@@ -10,3 +10,15 @@ export type Subpage = {
     name: string,
     route: string,
 }
+
+export type Bartender = {
+    name: string,
+    username: string
+    active: boolean,
+}
+
+export type Barvagt = {
+    date: Date,
+    resposible: Bartender,
+    bartenders: Bartender[]
+}

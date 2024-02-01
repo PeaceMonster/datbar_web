@@ -1,15 +1,9 @@
 <script lang='ts'>
-    import type { Vagt } from "./type";
-    import Barvagt from "./Barvagt.svelte";
+    import type { Barvagt } from "../lib/types";
+    import Vagt from "./vagt.svelte";
     let last_page = false;
 
-    let vagter : Vagt[] = [
-        {
-            date: "Feb 02",
-            responsible: "VH",
-            bartendere: "Erik Funder, Simon Dohn"
-        }
-    ];
+    let vagter : Barvagt[] = [];
 </script>
 
 <h2>Barplan</h2>
@@ -28,7 +22,7 @@
     </thead>
     <tbody>
         {#each vagter as vagt}
-            <Barvagt vagt={vagt}/>
+            <Vagt vagt={vagt}/>
         {/each}
     </tbody>
 </table>

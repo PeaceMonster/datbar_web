@@ -7,4 +7,4 @@ dev:
 	cd frontend; npm run dev
 
 server:
-	cargo run
+	RUST_LOG=debug cargo run

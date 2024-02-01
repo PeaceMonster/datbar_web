@@ -1,8 +1,4 @@
-export type Bartender = {
-    name: string,
-    username: string
-    active: boolean,
-}
+import type { Bartender } from "../lib/types";
 
 export async function get_bartenders() : Promise<Bartender[][]> {
 
