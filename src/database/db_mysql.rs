@@ -11,8 +11,8 @@ pub struct DBClient {
 impl DBSocket for DBClient {
     fn get_barplan_from_date(&self, date: NaiveDate) -> anyhow::Result<Vec<Barplan>> {
         let mut conn = self.pool.get_conn().unwrap();
-        println!("SELECT Barvagter.dato,Barvagter.vagtId,Bartendere.* from Barvagter INNER JOIN Bartendere on Bartendere.bartenderId = Barvagter.ansvarlig WHERE Barvagter.dato > '{}'", date);
-        let vagter : Vec<(NaiveDate, i64, Bartender)> = conn.query_map(format!(r"SELECT Barvagter.dato,Barvagter.vagtId,Bartendere.* from Barvagter INNER JOIN Bartendere on Bartendere.bartenderId = Barvagter.ansvarlig WHERE Barvagter.dato > {}", date),
+        
+        let vagter : Vec<(NaiveDate, i64, Bartender)> = conn.query_map(format!(r"SELECT Barvagter.dato,Barvagter.vagtId,Bartendere.* from Barvagter INNER JOIN Bartendere on Bartendere.bartenderId = Barvagter.ansvarlig WHERE dato >= '{}'", date),
         |(date, vagt_id, _, name, username, active) : (String, i64, i64, String, String, bool)|  {
             (NaiveDate::parse_from_str(&date, "%Y-%m-%d").unwrap(), vagt_id, Bartender {
                 name,

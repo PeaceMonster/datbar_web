@@ -1,9 +1,15 @@
 <script lang='ts'>
     import type { Barvagt } from "../lib/types";
+    import { get_barplan } from "./script";
     import Vagt from "./vagt.svelte";
     let last_page = false;
 
     let vagter : Barvagt[] = [];
+
+    get_barplan(new Date).then((r) => {
+        vagter = r;
+        console.log(r);
+    })
 </script>
 
 <h2>Barplan</h2>

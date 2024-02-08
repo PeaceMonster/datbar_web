@@ -1,4 +1,5 @@
-import type { Bartender } from "../lib/types"
+import type { Bartender, Barvagt } from "../lib/types"
+
 
 export function get_short_month(month : number) : string {
     switch (month) {
@@ -13,7 +14,7 @@ export function get_short_month(month : number) : string {
         case 8: return "Sep"
         case 9: return "Oct"
         case 10: return "Nov"
-        case 12: return "Dec"
+        case 11: return "Dec"
         default: return "You done goofed"
     }
 }
@@ -27,4 +28,20 @@ export function expand_bartender_list(list : Bartender[]) : string {
         }
     }
     return result
+}
+
+export async function get_barplan(date: Date) {
+    let getdate = date.toISOString().slice(0,10);
+    let response : any[] = await (await fetch("/api/barplan/get/" + getdate)).json();
+
+    let result : Barvagt[] = response.map((v, _) => {
+        console.log(v);
+        return {
+            date: new Date(v.date),
+            resposible: v.responisble,
+            bartenders: v.bartenders,
+        }
+    })
+
+    return result;
 }
