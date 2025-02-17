@@ -41,11 +41,11 @@ impl DBSocket for DBClient {
         let mut conn = self.pool.get_conn().unwrap();
 
         let result = conn.query_map(
-            r"SELECT name,username,aktiv FROM Bartendere",
-            |(name, username, aktiv)| Bartender {
+            r"SELECT name,username,active FROM Bartendere",
+            |(name, username, active)| Bartender {
                 name,
                 username,
-                active: aktiv,
+                active,
             },
         )?;
 
@@ -55,8 +55,33 @@ impl DBSocket for DBClient {
 
 impl DBClient {
     pub async fn new() -> Result<DBClient, anyhow::Error> {
+        let pool = Pool::new("mysql://server@127.0.0.1/datbarweb")?;
+        let mut conn = pool.get_conn().unwrap();
+        conn.exec_drop(
+            r"CREATE TABLE IF NOT EXISTS Bartendere (
+                    id INT AUTO_INCREMENT PRIMARY KEY, 
+                    name VARCHAR NOT NULL, 
+                    username VARCHAR NOT NULL, 
+                    active BOOL NOT NULL)",())?;
+
+        conn.exec_drop(
+            r"CREATE TABLE IF NOT EXISTS Barvagter (
+                    id INT AUTO_INCREMENT PRIMARY KEY, 
+                    ansvarlig_id NOT NULL, 
+                    date DATE, 
+                    FOREIGN KEY (ansvarlig_id) REFERENCES Bartendere(id))",())?;
+
+        conn.exec_drop(
+            r"CREATE TABLE IF NOT EXISTS VagtTilBartender (
+                vagt_id INT NOT NULL, 
+                bartender_id INT NOT NULL, 
+                FOREIGN KEY (vagt_id) REFERENCES Barvagter(id), 
+                FOREIGN KEY (bartender_id) REFERENCES Bartendere (id))",())?;
+        
+
+
         Ok(DBClient {
-            pool: Pool::new("mysql://server@127.0.0.1/datbarweb")?,
+            pool
         })
     }
 }
